@@ -5,7 +5,6 @@ import in.codingstreams.etbffservice.controller.mapper.AuthResponseMapper;
 import in.codingstreams.etbffservice.controller.model.AuthRequestDto;
 import in.codingstreams.etbffservice.controller.model.AuthResponseDto;
 import in.codingstreams.etbffservice.service.auth.AuthService;
-import in.codingstreams.etbffservice.service.model.AuthResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -31,6 +30,18 @@ public class V1ApiController {
     var authResponse = authService.signUp(AuthRequestMapper.INSTANCE.toAuthRequest(authRequestDto));
 
     log.info(METHOD_LOG_END, "signUp");
+
+    return ResponseEntity
+        .status(HttpStatus.OK)
+        .body(AuthResponseMapper.INSTANCE.toAuthResponseDto(authResponse));
+  }
+
+  @PostMapping("/login")
+  public ResponseEntity<AuthResponseDto> login(@RequestBody AuthRequestDto authRequestDto){
+    log.info(METHOD_LOG_START, "login");
+    var authResponse = authService.login(AuthRequestMapper.INSTANCE.toAuthRequest(authRequestDto));
+
+    log.info(METHOD_LOG_END, "login");
 
     return ResponseEntity
         .status(HttpStatus.OK)

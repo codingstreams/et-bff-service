@@ -10,4 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 public interface UserAuthService {
   @PostMapping("/sign-up")
   ResponseEntity<AuthResponse> signUp(AuthRequest authRequest);
+
+  @PostMapping("/login")
+  ResponseEntity<AuthResponse> login(AuthRequest authRequest);
 }

@@ -22,4 +22,12 @@ public class AuthServiceImpl implements AuthService{
     log.info(METHOD_LOG_END, "signUp");
     return responseEntity.getBody();
   }
+
+  @Override
+  public AuthResponse login(AuthRequest authRequest) {
+    log.info(METHOD_LOG_START, "login");
+    var responseEntity = userAuthService.login(authRequest);
+    log.info(METHOD_LOG_END, "login");
+    return responseEntity.getBody();
+  }
 }
