@@ -2,8 +2,12 @@ package in.codingstreams.etbffservice.controller;
 
 import in.codingstreams.etbffservice.controller.mapper.AuthRequestMapper;
 import in.codingstreams.etbffservice.controller.mapper.AuthResponseMapper;
+import in.codingstreams.etbffservice.controller.mapper.VerifyTokenRequestMapper;
+import in.codingstreams.etbffservice.controller.mapper.VerifyTokenResponseMapper;
 import in.codingstreams.etbffservice.controller.model.AuthRequestDto;
 import in.codingstreams.etbffservice.controller.model.AuthResponseDto;
+import in.codingstreams.etbffservice.controller.model.VerifyTokenRequestDto;
+import in.codingstreams.etbffservice.controller.model.VerifyTokenResponseDto;
 import in.codingstreams.etbffservice.service.auth.AuthService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -46,5 +50,17 @@ public class V1ApiController {
     return ResponseEntity
         .status(HttpStatus.OK)
         .body(AuthResponseMapper.INSTANCE.toAuthResponseDto(authResponse));
+  }
+
+  @PostMapping("/verify-token")
+  public ResponseEntity<VerifyTokenResponseDto> verifyToken(@RequestBody VerifyTokenRequestDto verifyTokenRequestDto){
+    log.info(METHOD_LOG_START, "verifyToken");
+    var verifyTokenResponse = authService.verifyToken(VerifyTokenRequestMapper.INSTANCE.toVerifyTokenRequest(verifyTokenRequestDto));
+
+    log.info(METHOD_LOG_END, "verifyToken");
+
+    return ResponseEntity
+        .status(HttpStatus.OK)
+        .body(VerifyTokenResponseMapper.INSTANCE.toVerifyTokenResponseDto(verifyTokenResponse));
   }
 }
