@@ -1,5 +1,7 @@
 package in.codingstreams.etbffservice.service.external;
 
+import in.codingstreams.etbffservice.service.auth.VerifyTokenRequest;
+import in.codingstreams.etbffservice.service.auth.VerifyTokenResponse;
 import in.codingstreams.etbffservice.service.model.AuthRequest;
 import in.codingstreams.etbffservice.service.model.AuthResponse;
 import org.springframework.cloud.openfeign.FeignClient;
@@ -13,4 +15,7 @@ public interface UserAuthService {
 
   @PostMapping("/login")
   ResponseEntity<AuthResponse> login(AuthRequest authRequest);
+
+  @PostMapping("/verify-token")
+  ResponseEntity<VerifyTokenResponse> verifyToken(VerifyTokenRequest verifyTokenRequest);
 }

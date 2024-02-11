@@ -30,4 +30,12 @@ public class AuthServiceImpl implements AuthService{
     log.info(METHOD_LOG_END, "login");
     return responseEntity.getBody();
   }
+
+  @Override
+  public VerifyTokenResponse verifyToken(VerifyTokenRequest verifyTokenRequest) {
+    log.info(METHOD_LOG_START, "verifyToken");
+    var responseEntity = userAuthService.verifyToken(verifyTokenRequest);
+    log.info(METHOD_LOG_END, "verifyToken");
+    return responseEntity.getBody();
+  }
 }

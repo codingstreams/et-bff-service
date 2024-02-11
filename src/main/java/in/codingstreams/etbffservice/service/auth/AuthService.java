@@ -7,4 +7,6 @@ public interface AuthService {
   AuthResponse signUp(AuthRequest authRequest);
 
   AuthResponse login(AuthRequest authRequest);
+
+  VerifyTokenResponse verifyToken(VerifyTokenRequest verifyTokenRequest);
 }
