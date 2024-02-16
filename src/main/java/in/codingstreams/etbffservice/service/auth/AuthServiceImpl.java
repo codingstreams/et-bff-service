@@ -1,6 +1,6 @@
 package in.codingstreams.etbffservice.service.auth;
 
-import in.codingstreams.etbffservice.service.external.UserAuthService;
+import in.codingstreams.etbffservice.service.external.UserAuthServiceFeignClient;
 import in.codingstreams.etbffservice.service.model.AuthRequest;
 import in.codingstreams.etbffservice.service.model.AuthResponse;
 import lombok.RequiredArgsConstructor;
@@ -14,11 +14,11 @@ import static in.codingstreams.etbffservice.constant.LoggingConstant.METHOD_LOG_
 @RequiredArgsConstructor
 @Slf4j
 public class AuthServiceImpl implements AuthService{
-  private final UserAuthService userAuthService;
+  private final UserAuthServiceFeignClient userAuthServiceFeignClient;
   @Override
   public AuthResponse signUp(AuthRequest authRequest) {
     log.info(METHOD_LOG_START, "signUp");
-    var responseEntity = userAuthService.signUp(authRequest);
+    var responseEntity = userAuthServiceFeignClient.signUp(authRequest);
     log.info(METHOD_LOG_END, "signUp");
     return responseEntity.getBody();
   }
@@ -26,7 +26,7 @@ public class AuthServiceImpl implements AuthService{
   @Override
   public AuthResponse login(AuthRequest authRequest) {
     log.info(METHOD_LOG_START, "login");
-    var responseEntity = userAuthService.login(authRequest);
+    var responseEntity = userAuthServiceFeignClient.login(authRequest);
     log.info(METHOD_LOG_END, "login");
     return responseEntity.getBody();
   }
@@ -34,7 +34,7 @@ public class AuthServiceImpl implements AuthService{
   @Override
   public VerifyTokenResponse verifyToken(VerifyTokenRequest verifyTokenRequest) {
     log.info(METHOD_LOG_START, "verifyToken");
-    var responseEntity = userAuthService.verifyToken(verifyTokenRequest);
+    var responseEntity = userAuthServiceFeignClient.verifyToken(verifyTokenRequest);
     log.info(METHOD_LOG_END, "verifyToken");
     return responseEntity.getBody();
   }
